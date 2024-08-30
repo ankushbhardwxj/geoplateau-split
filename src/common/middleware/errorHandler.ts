@@ -1,13 +1,28 @@
-import type { ErrorRequestHandler, RequestHandler } from "express";
+import { logger } from "@/server";
+import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { ValidationError } from "../errors/validationError";
+import { ServiceResponse } from "../models/serviceResponse";
+import { handleServiceResponse } from "../utils/httpHandlers";
 
-const unexpectedRequest: RequestHandler = (_req, res) => {
-  res.sendStatus(StatusCodes.NOT_FOUND);
-};
+export function errorHandler(err: Error, req:Request, res:Response, next: NextFunction) {
+  if (err instanceof ValidationError) {
+    handleServiceResponse(ServiceResponse.failure(err.message, null, StatusCodes.BAD_REQUEST), res);
+    err.log({req, res});
+    return;
+  }
+  logger.error({
+    message: err.message,
+    req :{
+      method: req.method,
+      url: req.url,
+    },
+    context: res.locals.ctx,
+    stack: err.stack
+  })
+  handleServiceResponse(
+    ServiceResponse.failure("Internal Server Error", null, StatusCodes.INTERNAL_SERVER_ERROR),
+    res
+  )
+}
 
-const addErrorToRequestLog: ErrorRequestHandler = (err, _req, res, next) => {
-  res.locals.err = err;
-  next(err);
-};
-
-export default () => [unexpectedRequest, addErrorToRequestLog];
