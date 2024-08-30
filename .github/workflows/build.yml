@@ -23,4 +23,12 @@ jobs:
         run: npm ci
 
       - name: Run Build
+        env: 
+            NODE_ENV: production
+            PORT: 8081
+            HOST: localhost
+            CORS_ORIGIN: "*"
+            COMMON_RATE_LIMIT_WINDOW_MS: "1000" # Window size for rate limiting (ms)
+            COMMON_RATE_LIMIT_MAX_REQUESTS: "20" # Max number of requests per window per IP
+            MONGO_URI: ${{ secrets.MONGO_URI }}
         run: npm run build
