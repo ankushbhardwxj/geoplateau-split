@@ -1,5 +1,5 @@
 import { logger } from "@/server";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 export class ValidationError extends Error {
   private meta;
@@ -19,7 +19,7 @@ export class ValidationError extends Error {
     }
   }
 
-  log({req, res}: {req: Request, res: Response}) {
+  log({ req, res }: { req: Request; res: Response }) {
     const conf = {
       message: this.message,
       error: {
@@ -28,7 +28,7 @@ export class ValidationError extends Error {
       },
       meta: this.meta,
       req: {},
-      context: {}
+      context: {},
     };
     if (req) {
       conf.req = {

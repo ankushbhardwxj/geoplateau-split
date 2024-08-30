@@ -35,7 +35,7 @@ app.use(requestLogger);
 
 // Routes
 app.use("/health-check", healthCheckRouter);
-app.use("/split-building-limit", buildingLimitRouter);
+app.use("/api/v1/geo", buildingLimitRouter);
 
 // Swagger UI
 app.use(openAPIRouter);

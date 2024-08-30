@@ -226,13 +226,10 @@ var postData = JSON.stringify({
 });
 
 export default async function() {
-  const res = await http.post('http://localhost:8081/split-building-limit', postData, {
+  await http.post('http://localhost:8081/api/v1/geo/split-building-limit', postData, {
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  console.log(res.status);
-  // const res = await http.get('http://test.k6.io');
-  // console.log(res.status);
   sleep(1);
 }
