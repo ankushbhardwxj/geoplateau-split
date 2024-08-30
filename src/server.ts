@@ -1,3 +1,4 @@
+import dbLoader from "@/common/loaders/db";
 import cors from "cors";
 import express, { type Express } from "express";
 import helmet from "helmet";
@@ -6,7 +7,6 @@ import { pino } from "pino";
 import { openAPIRouter } from "@/api-docs/openAPIRouter";
 import { healthCheckRouter } from "@/api/healthCheck/healthCheckRouter";
 import { errorHandler } from "@/common/middleware/errorHandler";
-import rateLimiter from "@/common/middleware/rateLimiter";
 import requestLogger from "@/common/middleware/requestLogger";
 import { env } from "@/common/utils/envConfig";
 import { buildingLimitRouter } from "./api/buildingLimitSplitter/buildingLimitSplitterRouter";
@@ -22,10 +22,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
 app.use(helmet());
-app.use(rateLimiter);
+// NOTE: disabled for testing concurrency, enable in production
+// app.use(rateLimiter);
 
 // Request logging
 app.use(requestLogger);
+
+// load database, queues, etc
+(async () => {
+  await dbLoader();
+})();
 
 // Routes
 app.use("/health-check", healthCheckRouter);
