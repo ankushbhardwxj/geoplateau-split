@@ -38,8 +38,6 @@ brew install k6
 k6 run script.js
 ```
 
-### Benchmarks
-
 ### CI/CD, Hosting
 
 On every push to master, we run lint checks, build server, and run all tests.
