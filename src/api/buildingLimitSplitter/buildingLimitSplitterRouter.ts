@@ -1,3 +1,4 @@
+import { createApiRequest } from "@/api-docs/openAPIRequestBuilder";
 import { createApiResponse } from "@/api-docs/openAPIResponseBuilders";
 import inputValidator from "@/common/middleware/inputValidator";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
@@ -14,10 +15,17 @@ const BuildingLimitResponseSchema = z.object({
   responseObject: z.array(z.object({})),
 });
 
+const BuildingLimitRequestSchema = z.object({
+  refid: z.string(),
+  building_limits: z.object({}),
+  height_plateaus: z.object({}),
+});
+
 buildingLimitRegistry.registerPath({
   method: "post",
-  path: "/split-building-limit",
+  path: "/api/v1/geo/split-building-limit",
   tags: ["Building Limit Splitter"],
+  request: createApiRequest(BuildingLimitRequestSchema),
   responses: createApiResponse(BuildingLimitResponseSchema, "Success"),
 });
 

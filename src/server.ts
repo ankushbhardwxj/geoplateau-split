@@ -29,9 +29,7 @@ app.use(helmet());
 app.use(requestLogger);
 
 // load database, queues, etc
-(async () => {
-  await dbLoader();
-})();
+dbLoader();
 
 // Routes
 app.use("/health-check", healthCheckRouter);
