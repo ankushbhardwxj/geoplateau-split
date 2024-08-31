@@ -3,7 +3,7 @@ import { handleServiceResponse } from "@/common/utils/httpHandlers";
 import { booleanIntersects, featureCollection, intersect, polygon } from "@turf/turf";
 import type { Request, RequestHandler, Response } from "express";
 import type { Feature, FeatureCollection } from "geojson";
-import { buildingLimitSplitterService } from "./buildingLimitSplitterService";
+import { buildingLimitSplitterService } from "./service";
 
 /**
  * Controller class for handling requests related to building limit splitting.

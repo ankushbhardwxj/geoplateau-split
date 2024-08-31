@@ -5,7 +5,7 @@ import { validateRequestBody } from "@/common/utils/httpHandlers";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import express, { type Router } from "express";
 import { z } from "zod";
-import { buildingLimitSplitterController } from "./buildingLimitSplitterController";
+import { buildingLimitSplitterController } from "./controller";
 
 export const buildingLimitRegistry = new OpenAPIRegistry();
 export const buildingLimitRouter: Router = express.Router();

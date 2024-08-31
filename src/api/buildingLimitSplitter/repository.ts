@@ -1,5 +1,5 @@
 import type { GeoJSONDTO } from "@/common/types/input";
-import BuildingLimitSplitter from "./buildingLimitSplitterModel";
+import BuildingLimitSplitter from "./model";
 
 export class BuildingLimitSplitterRepository {
   private buildingSplitModel: typeof BuildingLimitSplitter;

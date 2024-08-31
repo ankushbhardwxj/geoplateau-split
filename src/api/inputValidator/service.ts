@@ -34,9 +34,12 @@ export class InputValidatorService {
     });
     const combinedHeightPlateau = union(featureCollection(heightPlateausPolygons));
     if (!combinedHeightPlateau) {
-      throw new ValidationError("Validation Error: Height plateaus do not completely cover the building limits");
+      throw new ValidationError("Validation Error: Failed to combine height plateaus");
     }
     const isCompletelyCovered = booleanWithin(building_limits.features[0], combinedHeightPlateau);
+    if (!isCompletelyCovered) {
+      throw new ValidationError("Validation Error: Height plateaus do not completely cover the building limits");
+    }
     return isCompletelyCovered;
   }
 
@@ -52,7 +55,7 @@ export class InputValidatorService {
     });
     const heightPlateausUnion = union(featureCollection(heightPlateausPolygon));
     if (!heightPlateausUnion) {
-      throw new ValidationError("Validation Error: Gaps exists between height plateaus");
+      throw new ValidationError("Validation Error: Failed to combine height plateaus");
     }
     const totalAreaMerged = area(heightPlateausUnion);
     if (totalArea < totalAreaMerged) {

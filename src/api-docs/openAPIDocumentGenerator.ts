@@ -1,6 +1,6 @@
 import { OpenAPIRegistry, OpenApiGeneratorV3 } from "@asteasolutions/zod-to-openapi";
 
-import { buildingLimitRegistry } from "@/api/buildingLimitSplitter/buildingLimitSplitterRouter";
+import { buildingLimitRegistry } from "@/api/buildingLimitSplitter/router";
 import { healthCheckRegistry } from "@/api/healthCheck/healthCheckRouter";
 
 export function generateOpenAPIDocument() {

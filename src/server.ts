@@ -9,7 +9,7 @@ import { healthCheckRouter } from "@/api/healthCheck/healthCheckRouter";
 import { errorHandler } from "@/common/middleware/errorHandler";
 import requestLogger from "@/common/middleware/requestLogger";
 import { env } from "@/common/utils/envConfig";
-import { buildingLimitRouter } from "./api/buildingLimitSplitter/buildingLimitSplitterRouter";
+import { buildingLimitRouter } from "./api/buildingLimitSplitter/router";
 
 const logger = pino({ name: "server start" });
 const app: Express = express();

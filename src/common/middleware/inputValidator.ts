@@ -1,4 +1,4 @@
-import { InputValidatorService } from "@/api/inputValidator/inputValidatorService";
+import { InputValidatorService } from "@/api/inputValidator/service";
 import type { NextFunction, Request, RequestHandler, Response } from "express";
 import type { GeoJSONInputData } from "../types/input";
 

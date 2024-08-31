@@ -3,7 +3,7 @@ import type { GeoJSONDTO } from "@/common/types/input";
 import { logger } from "@/server";
 import AsyncRetry from "async-retry";
 import type { Feature, FeatureCollection } from "geojson";
-import { BuildingLimitSplitterRepository } from "./buildingLimitSplitterRepository";
+import { BuildingLimitSplitterRepository } from "./repository";
 
 /**
  * Service class for handling business logic related to building limit splitting.
