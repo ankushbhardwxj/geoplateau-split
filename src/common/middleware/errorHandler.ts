@@ -1,6 +1,7 @@
 import { logger } from "@/server";
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { ZodError } from "zod";
 import { ValidationError } from "../errors/validationError";
 import { ServiceResponse } from "../models/serviceResponse";
 import { handleServiceResponse } from "../utils/httpHandlers";
@@ -9,6 +10,13 @@ export function errorHandler(err: Error, req: Request, res: Response, next: Next
   if (err instanceof ValidationError) {
     handleServiceResponse(ServiceResponse.failure(err.message, null, StatusCodes.BAD_REQUEST), res);
     err.log({ req, res });
+    return;
+  }
+  if (err instanceof ZodError) {
+    handleServiceResponse(
+      ServiceResponse.failure(err.name, JSON.parse(err.message), StatusCodes.INTERNAL_SERVER_ERROR),
+      res,
+    );
     return;
   }
   logger.error({

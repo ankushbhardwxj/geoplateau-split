@@ -1,6 +1,7 @@
 import { createApiRequest } from "@/api-docs/openAPIRequestBuilder";
 import { createApiResponse } from "@/api-docs/openAPIResponseBuilders";
 import inputValidator from "@/common/middleware/inputValidator";
+import { validateRequestBody } from "@/common/utils/httpHandlers";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 import express, { type Router } from "express";
 import { z } from "zod";
@@ -16,7 +17,7 @@ const BuildingLimitResponseSchema = z.object({
 });
 
 const BuildingLimitRequestSchema = z.object({
-  refid: z.string(),
+  refid: z.number(),
   building_limits: z.object({}),
   height_plateaus: z.object({}),
 });
@@ -31,6 +32,7 @@ buildingLimitRegistry.registerPath({
 
 buildingLimitRouter.post(
   "/split-building-limit",
+  validateRequestBody(BuildingLimitRequestSchema),
   inputValidator,
   buildingLimitSplitterController.getBuildingLimitSplitter,
 );
