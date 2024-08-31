@@ -44,6 +44,7 @@ On every push to master, we run lint checks, build server, and run all tests.
 Server hosted on Render at URL: https://geoplateau-split.onrender.com
 
 Swagger API docs at: https://geoplateau-split.onrender.com
+
 <details>
   <summary>Sample curl request</summary>
   
@@ -219,5 +220,6 @@ curl --location --request POST 'https://geoplateau-split.onrender.com/api/v1/geo
     ]
   }
 }'
+
 </details>
 
