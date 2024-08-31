@@ -24,7 +24,7 @@ describe("Building Limit Splitter Endpoint", () => {
       expect(response.status).toBe(200);
       expect(responseBody.success).toBe(true);
       expect(responseBody.message).toBe("Building limit split successfully");
-      expect(responseBody.responseObject.length).toBeGreaterThan(0);
+      expect(responseBody.responseObject.type).toBe("FeatureCollection");
     });
 
     it("should return an error message if the input GeoJSON is invalid", async () => {

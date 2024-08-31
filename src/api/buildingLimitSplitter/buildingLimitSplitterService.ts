@@ -2,7 +2,7 @@ import { ServiceResponse } from "@/common/models/serviceResponse";
 import type { GeoJSONDTO } from "@/common/types/input";
 import { logger } from "@/server";
 import AsyncRetry from "async-retry";
-import type { Feature } from "geojson";
+import type { Feature, FeatureCollection } from "geojson";
 import { BuildingLimitSplitterRepository } from "./buildingLimitSplitterRepository";
 
 /**
@@ -19,7 +19,7 @@ export class BuildingLimitSplitterService {
     buildingLimits,
     heightPlateau,
     splitLimits,
-  }: GeoJSONDTO): Promise<ServiceResponse<Feature[] | null>> {
+  }: GeoJSONDTO): Promise<ServiceResponse<FeatureCollection | null>> {
     // Retry the operation in case of a conflict
     await AsyncRetry(
       async (bail) => {

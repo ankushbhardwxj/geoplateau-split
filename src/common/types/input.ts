@@ -17,5 +17,5 @@ export type GeoJSONDTO = {
   refid: number;
   buildingLimits: FeatureCollection;
   heightPlateau: FeatureCollection;
-  splitLimits: Array<Feature>;
+  splitLimits: FeatureCollection;
 };
