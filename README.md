@@ -3,7 +3,7 @@
 ### System Design 
 
 - API: We assume client uses HTTP polling, therefore, service is an express server
-- Validation: GeoJSON input validation must be done before processing, therefore, we do it at a route middleware
+- Validation: GeoJSON input validation must be done before processing, therefore, we do it at a route middleware. We use Zod to validate the request body received, and then further validate the GeoJSON data.
 - Database: We choose NoSQL (mongodb). Inbuilt support for GeoJSON data, and optimistic concurrency control
   - Conflict Resolution: We use async-retry package, to retry gracefully if there's a conflict/error.
 
