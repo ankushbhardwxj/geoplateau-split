@@ -220,6 +220,7 @@ curl --location --request POST 'https://geoplateau-split.onrender.com/api/v1/geo
     ]
   }
 }'
+```
 
 </details>
 
