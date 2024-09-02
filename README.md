@@ -9,6 +9,24 @@
 
 ### Getting Started
 
+NOTE: Add a `.env` file to the root of the project, with the following properties: 
+```
+# Environment Configuration
+NODE_ENV="development" # Options: 'development', 'production'
+PORT="8081"            # The port your server will listen on
+HOST="localhost"       # Hostname for the server
+
+# CORS Settings
+CORS_ORIGIN="http://localhost:*" # Allowed CORS origin, adjust as necessary
+
+# Rate Limiting
+COMMON_RATE_LIMIT_WINDOW_MS="1000" # Window size for rate limiting (ms)
+COMMON_RATE_LIMIT_MAX_REQUESTS="20" # Max number of requests per window per IP
+
+# Database Configuration
+MONGO_URI="mongodb+srv://<usernaem>:<password>@geoplateau-split.nkkc8.mongodb.net/?retryWrites=true&w=majority&appName=geoplateau-split" # MongoDB connection URI
+```
+
 ```bash
 # install dependencies
 npm install
