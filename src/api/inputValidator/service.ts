@@ -15,7 +15,7 @@ export class InputValidatorService {
   }
 
   // check if the input data is a valid GeoJSON
-  isInputGeoJSONValid(): boolean {
+  private isInputGeoJSONValid(): boolean {
     const isBuildingLimitValid = this.geoJsonData.building_limits.features.every((feature) =>
       booleanValid(feature.geometry),
     );
@@ -26,7 +26,7 @@ export class InputValidatorService {
   }
 
   // check if the height plateaus completely cover the building limits
-  checkCompleteCoverage(): boolean {
+  private checkCompleteCoverage(): boolean {
     const { height_plateaus, building_limits } = this.geoJsonData;
     const heightPlateausPolygons = height_plateaus.features.map((feature: Feature) => {
       const { coordinates } = feature.geometry as Polygon;
@@ -44,7 +44,7 @@ export class InputValidatorService {
   }
 
   // check if there are any gaps between the height plateaus
-  checkGapsBetweenHeightPlateaus(): boolean {
+  private checkGapsBetweenHeightPlateaus(): boolean {
     let totalArea = 0;
     const { height_plateaus } = this.geoJsonData;
     const heightPlateausPolygon = height_plateaus.features.map((feature: Feature) => {
@@ -65,7 +65,7 @@ export class InputValidatorService {
   }
 
   // check if there are any invalid elevations in the height plateaus
-  checkInvalidElevations(): boolean {
+  private checkInvalidElevations(): boolean {
     const { height_plateaus } = this.geoJsonData;
     height_plateaus.features.forEach((feature: Feature) => {
       const elevation = feature.properties?.elevation;
@@ -77,7 +77,7 @@ export class InputValidatorService {
   }
 
   // check if there are any of the height plateau polygons overlap
-  checkOverLappingPlateaus(): boolean {
+  private checkOverLappingPlateaus(): boolean {
     const areaThreshold = 0.0001;
     const { height_plateaus } = this.geoJsonData;
     for (let i = 0; i < height_plateaus.features.length; i++) {

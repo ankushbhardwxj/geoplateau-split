@@ -9,7 +9,7 @@ import { buildingLimitSplitterService } from "./service";
  * Controller class for handling requests related to building limit splitting.
  */
 class BuildingLimitSplitterController {
-  public getBuildingLimitSplitter: RequestHandler = async (req: Request, res: Response) => {
+  public splitBuildingLimits: RequestHandler = async (req: Request, res: Response) => {
     const { building_limits: buildingLimits, height_plateaus: heightPlateau, refid } = req.body as GeoJSONInputData;
     const splitLimits: FeatureCollection = {
       type: "FeatureCollection",
